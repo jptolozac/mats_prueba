@@ -1,0 +1,34 @@
+<form class="form-group" #FormularioLogin="ngForm" (ngSubmit)="login(FormularioLogin)">
+
+    <div class="bg-white p-5 rounded-5 text-secondary" style="width:25 rem">
+        
+        <div class="text-center fs-1 fw-bold">Inicio de sesión</div>
+        <div class="d-flex justify-content-center">
+            <img src="../../assets/images/Icono.ico" alt="login-icono"
+            style="height: 7rem; border-radius:5px"/>
+         </div>
+         <br/>
+        <div class="alert alert-danger" role="alert" *ngIf="getError()">
+            El usuario o constraseña son incorrectos
+        </div>
+        <div class="input-group mt-4">
+            
+            <div class="input-group-text custom-bg-purple">
+                <img src="../../assets/images/nombre.png" alt="Usuario"  style ="height:2rem;"/>
+            </div>
+            <input [ngClass]="{casoError:getError()==true}" class="form-control borde-morado" type="text" name="usuario" placeholder="Usuario" style="margin-left:5px" ngModel/>
+        </div>
+        <div class="input-group mt-1">
+            <div class="input-group-text custom-bg-purple">
+                <img src="../../assets/images/id.png" alt="Password" style ="height:2rem;"/>
+            </div>
+            <input [ngClass]="{casoError:getError()==true}" class="form-control borde-morado" type="password" placeholder="Contraseña" name="password" style="margin-left:5px" ngModel/>
+        </div>
+       <button type="submit" class="btn custom-bg-purple text-white w-100 mt-4" id="Acceder">Acceder</button>
+       <button class="btn btn-danger text-white w-100 mt-4" (click)="volverGeneral()">Volver</button>
+       <br>
+        
+    </div>
+    </form>
+    
+    

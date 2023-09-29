@@ -1,0 +1,99 @@
+<div class="container mb-3">
+    <div class="card">
+        <!--Abre ventana emergenta para crear un Ticket-->
+        <app-crud-tickets 
+            [crear_ticket]="crear_ticket" 
+            (ventanaCrearCerrada)="CierreVentanaCrear()">
+        </app-crud-tickets>
+        <app-reclamos
+            [abrir_realizarReclamo]="crear_reclamo"
+            (cerrar_realizarReclamo)="CierreRealizarReclamo()"
+            [lista_reclamos]="lista_reclamos"
+            (cerrar_listaReclamos)="Cierrre_listaReclamos()"
+            >
+        </app-reclamos>
+        <app-administrar-usuarios
+            [ventana_administrar]="ventana_administrar"
+            (ventanaAdministrarCerrada)="cerrar_AdmUsuarios()"
+        >
+        </app-administrar-usuarios> 
+        <app-administrar-categorias
+            [ver_categorias]="ver_categorias"
+            (cerrar_categorias)="cerrar_AdmCategorias()"
+        >
+        </app-administrar-categorias>
+        <app-administrar-items
+            [ver_items]="ver_items"
+            (cerrar_items)="cerrar_AdmItems()"
+        >
+        </app-administrar-items>
+        <app-carga-masiva
+            [abrir_ventana]="abrir_ventana"
+            (cerrar_ventana)="cerrar_ventana()">
+        </app-carga-masiva>
+        <div class="row justify-content-center">
+            <div *ngIf="tipo_usuario=='estudiante'" class="col mb-3">
+                <button type="button" class="btn opcion" (click)="crearTicket()">
+                    <img src="../../../assets/images/crear_ticket.png" alt="opción de ver Tickets"  class="img-fluid" style="max-width: 100px;">
+                    <p class="fs-5">Crear ticket</p>
+                </button>
+            </div>
+            <div *ngIf="tipo_usuario=='estudiante'" class="col mb-3">
+                <button type="button" class="btn opcion" (click)="URL_listaTickets()">
+                    <img src="../../../assets/images/ticket.png" alt="opción de ver Tickets"  class="img-fluid" style="max-width: 100px;">
+                    <p class="fs-5">Ver estados de mis Tickets</p>
+                </button>
+            </div>
+            <div *ngIf="tipo_usuario=='estudiante'" class="col mb-3">
+                <button type="button" class="btn opcion" (click)="realizar_reclamo()">
+                    <img src="../../../assets/images/lista_quejas.png" alt="opción de ver Tickets" class="img-fluid" style="max-width: 100px;">
+                    <p class="fs-5">Realizar reclamo</p>
+                </button>
+            </div>
+            <div *ngIf="tipo_usuario=='administrador'" class="col mb-3">
+                <button type="button" class="btn opcion" (click)="URL_listaSolicitudes()">
+                    <img src="../../../assets/images/lista_solicitudes.png" alt="opción de ver Tickets"  class="img-fluid" style="max-width: 100px;">
+                    <p class="fs-5">Lista de solicitudes</p>
+                </button>
+            </div>
+            <!--Esta opción solo se muestra si se tiene permisos de mesa de ayuda o se es profesor-->
+            <div *ngIf="permiso_usuario=='3' || tipo_usuario=='profesor' || tipo_usuario=='administrador'" class="col mb-3">
+                <button type="button" class="btn opcion" (click)="URL_solicitudesAsignadas()">
+                    <img src="../../../assets/images/tickets_asignados.png" alt="opción de ver Tickets"  class="img-fluid" style="max-width: 100px;">
+                    <p class="fs-5">Lista de solicitudes asignadas</p>
+                </button>
+            </div>
+        
+            <div *ngIf="tipo_usuario=='administrador'" class="col mb-3">
+                <button type="button" class="btn opcion" (click)="mostrar_listaReclamos()">
+                    <img src="../../../assets/images/queja.png" alt="opción de ver Tickets"  class="img-fluid" style="max-width: 100px;">
+                    <p class="fs-5">Lista de reclamos</p>
+                </button>
+            </div>
+            <div *ngIf="tipo_usuario=='administrador'" class="col mb-3">
+                <button type="button" class="btn opcion" (click)="mostrar_AdmUsuarios()">
+                    <img src="../../../assets/images/usuarios.png" alt="opción de ver Tickets"  class="img-fluid" style="max-width: 100px;">
+                    <p class="fs-5">Administrar usuarios</p>
+                </button>
+            </div>
+            <div *ngIf="tipo_usuario=='administrador'" class="col mb-3">
+                <button type="button" class="btn opcion" (click)="mostrar_AdmCategorias()">
+                    <img src="../../../assets/images/categorias.png" alt="opción de ver Tickets"  class="img-fluid" style="max-width: 100px;">
+                    <p class="fs-5">Administrar categorías</p>
+                </button>
+            </div>
+            <div *ngIf="tipo_usuario=='administrador'" class="col mb-3">
+                <button type="button" class="btn opcion" (click)="mostrar_AdmItems()">
+                    <img src="../../../assets/images/items.png" alt="opción de ver Tickets"  class="img-fluid" style="max-width: 100px;">
+                    <p class="fs-5">Administrar ítems</p>
+                </button>
+            </div>
+            <div *ngIf="tipo_usuario=='administrador'" class="col mb-3">
+                <button type="button" class="btn opcion" (click)="mostrar_cargaMasiva()">
+                    <img src="../../../assets/images/csv.png" alt="opción de cargar usuario"  class="img-fluid" style="max-width: 100px;">
+                    <p class="fs-5">Cargar usuarios</p>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

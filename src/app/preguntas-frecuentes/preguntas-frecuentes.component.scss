@@ -1,0 +1,207 @@
+.cat{
+    color:rgb(121, 30, 182);
+}
+.form-control:focus{
+    outline-color:rgb(121, 30, 182);
+    border-color:rgb(121, 30, 182);
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+}
+.requisito{
+    color:rgb(201, 40, 40);
+    text-align: center;
+}
+#subir{
+    color:rgb(121, 30, 182);
+    outline-color:rgb(121, 30, 182);
+    border-color:rgb(121, 30, 182);
+}
+#subir:hover{
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+    background-color:rgb(238, 238, 238);
+}
+#guardar{
+    color:rgb(121, 30, 182);
+    outline-color:rgb(121, 30, 182);
+    border-color:rgb(121, 30, 182);
+}
+#guardar:hover{
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+    background-color:rgb(238, 238, 238);
+}
+.categoria_tarjeta{
+    color:rgb(76, 6, 122);
+}
+.opciones_tabla{
+   margin-right: 8px;
+}
+.areas_editar{
+    width: 100%;
+    outline-color: rgb(155, 150, 150);
+    border-color: rgb(155, 150, 150);
+    padding: 10px;
+}
+
+.areas_editar:focus{
+    outline-color: rgb(76, 6, 122);
+    border-color: rgb(76, 6, 122);
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+
+}  
+
+.card-medium {
+    width: 700px; /* Ajusta el ancho según tus necesidades */
+    margin: 0 auto; /* Centrar horizontalmente */
+    padding: 20px; /* Añade un espacio interno para mejorar el aspecto */
+    overflow-y:auto;
+    max-height: 90%;
+  }
+  
+  /* Estilos para centrar elementos en las filas */
+  .row.d-flex.justify-content-center.align-items-center {
+    /* Si se aplican estilos específicos en otras partes de la aplicación, se puede usar un selector más específico */
+    margin-bottom: 10px; /* Espacio entre elementos en la carta */
+  }
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#contenedor_encabezado{
+    background-image: url('../../assets/images/encabezado.png');
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el contenedor */
+    background-position: center center; /* Centra la imagen horizontal y verticalmente */
+}
+
+#titulo{
+    text-align: center;
+    color:white;
+    font-weight: bold;
+}
+.titulo_tarjeta{
+    color:rgb(76, 6, 122);
+    text-align: center;
+}
+
+.page-link{
+    color:rgb(76, 6, 122);
+}
+.page-item{
+    cursor:pointer;
+}
+.pagination .page-item.disabled .page-link {
+    color: gray; /* Cambiar el color del texto a morado cuando está deshabilitado */
+  }
+.page-link:hover{
+    background-color: rgb(76, 6, 122);
+    color: white;
+}
+
+.borde_cartas{
+    outline-color: rgb(76, 6, 122);
+    border-color: rgb(76, 6, 122);
+}
+.buscar:focus, .boton_buscar:focus {
+    outline-color: rgb(76, 6, 122);
+    border-color: rgb(76, 6, 122);
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+}
+.fondo_morado{
+    background-color:rgb(78, 5, 121);
+    color:white;
+    text-decoration: underline;
+}
+.boton_menu:hover{
+    background-color:rgb(135, 38, 190);
+}
+.borde-morado{
+    color: rgb(76, 6, 122);
+    border-color: rgb(76, 6, 122);
+}
+.borde-morado:hover{
+    background-color: rgb(76, 6, 122);
+    color:white;
+}
+.boton_buscar{
+    background-color: rgb(78, 5, 121);
+    border-color:rgb(62, 10, 75);
+}
+.boton_buscar:hover{
+    background-color: rgb(135, 38, 190);
+}
+
+
+.multiselect {
+    position:relative;
+}
+
+.selectBox {
+    position: relative;
+}
+
+.selectBox select {
+    width: 100%;
+}
+
+.overSelect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+.selectBox, #checkboxes {
+    width: 100%;
+}
+#checkboxes {
+    display: block;
+    border: 1px #dadada solid;
+    position:absolute;
+    background-color:white;
+    box-sizing: border-box;
+    overflow-y:auto;
+    max-height:110px;
+    border-radius: 8px;
+    padding: 10px;
+    width: 98%;
+}
+#checkboxes.hide {display:none;}
+
+#checkboxes label {
+    display: block;
+}
+
+#checkboxes label:hover {
+    background-color:rgb(169, 164, 175);
+}
+.flex-container {
+    display: flex;
+}
+#categorias{
+    color:rgb(78, 5, 121);
+    border-radius: 8px;
+    height: 30px;
+    text-align: center;
+
+}
+.form-check-input{
+    outline-color:rgb(121, 30, 182);
+    border-color:rgb(121, 30, 182);
+}
+.form-check-input:focus{
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+}
+.form-check-input:checked {
+    background-color: rgb(121, 30, 182);
+    border-color:rgb(121, 30, 182);
+}
+  
+.form-check-input:checked + .form-check-label {
+    color:rgb(121, 30, 182);
+    font-weight: bold;
+}

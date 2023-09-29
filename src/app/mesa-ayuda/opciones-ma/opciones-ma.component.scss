@@ -1,0 +1,18 @@
+.opcion{
+    color:white;
+    background-color: rgb(76, 6, 122);
+    text-align: center;
+    border-radius: 8px;
+    margin: 10px;
+    font-weight: bold;
+    height: 100%;
+    border:0;
+    width: 100%;
+}
+.opcion:hover{
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+    background-color: rgb(101, 35, 145); 
+}
+.card{
+    border: 0;
+}

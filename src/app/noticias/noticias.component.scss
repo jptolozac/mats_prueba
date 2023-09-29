@@ -1,0 +1,60 @@
+.custom-bg-purple {
+    background-color:rgb(76, 6, 122); 
+}
+button{
+    width: 100%;
+    height: 100%;
+}
+.opciones{
+    text-align:center; 
+    text-decoration: underline; 
+    color:white;
+}
+.opciones_admin{
+    text-align:center; 
+    text-decoration: underline; 
+    color:rgb(121, 30, 182);
+}
+.custom-search-input:focus, .custom-search-button:focus {
+    outline-color: rgb(76, 6, 122);
+    border-color: rgb(76, 6, 122);
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+}
+.paginacion{
+    margin:20px 0;
+}
+.paginacion ul{
+    list-style: none;
+    text-align: center;
+}
+.paginacion ul li{
+    display:inline-block;
+    margin-right: 10px;
+    color:white;
+    padding: 10px 20px;
+    background-color:rgb(76, 6, 122);
+    border-radius: 5px;
+    
+}
+.paginacion ul li:hover{
+    background-color:rgb(121, 30, 182);
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+}
+.sombreado:hover{
+    background-color:rgb(121, 30, 182);
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+}
+.opciones_administrador{
+    outline-color: rgb(76, 6, 122);
+    border-color: rgb(76, 6, 122);
+}
+
+.opciones_administrador:hover{
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+    background-color:rgb(238, 238, 238);
+}
+
+#numero_pagina{
+    text-align: center;
+    color:rgb(121, 30, 182);
+}

@@ -1,0 +1,23 @@
+:host {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    background-color: #f8f9fa;
+}
+.casoError{
+    border-color:rgb(240, 35, 35);
+}
+.custom-bg-purple {
+    background-color:rgb(76, 6, 122); 
+}
+#Acceder:hover {
+    background-color:rgb(108, 22, 165);
+}
+.borde-morado:focus{
+    outline-color:rgb(121, 30, 182);
+    border-color:rgb(121, 30, 182);
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+}
+
+

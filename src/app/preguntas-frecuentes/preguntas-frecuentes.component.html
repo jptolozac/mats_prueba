@@ -1,0 +1,297 @@
+<div class="container mt-2 d-flex justify-content-center align-items-center">
+  <div class="card w-100 mb-3 border-0">
+    <div class="container" id="contenedor_encabezado">
+    <div class="card-body">
+      <h5 class="card-title display-3 mt-5" id="titulo">¿En qué podemos ayudarte?</h5>
+      <div class="row align-items-center mt-5 mb-2">
+        <div class="multiselect">
+          <div class="selectBox mb-1" (click)="showCheckboxes()">
+            <select id="categorias">
+              <option>{{txt_lista}}</option>
+            </select>
+            <div class="overSelect"></div>
+          </div>
+          <div id="checkboxes" class="container-sm" [style.display]="mostrarCheckboxes ? 'block' : 'none'">
+            <div *ngFor="let categoria of categorias" class="form-check">
+              <input type="checkbox" class="form-check-input" [id]="'c' + categoria.id" [(ngModel)]="categoria.seleccionado" (change)="activar()">
+              <label class="form-check-label" [for]="'c' + categoria.id">{{ categoria.nombre }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+            <input type="text" class="form-control buscar" placeholder="Buscar..." [(ngModel)]="txt_buscar">
+        </div>   
+        <div class="col-auto">
+            <button id="boton_buscar" class="btn text-white boton_buscar" type="button"><img src="../../assets/images/lupa.png" style ="height:2rem;" (click)="buscar()"></button>
+        </div> 
+      </div>
+    </div>
+  </div>
+  <div class="container" *ngIf="usuario=='administrador'"><!-- || permiso_usuario=='true' -->
+    <app-lista-categorias [categorias]="categorias" (categoriaEditada)="editarCategoria($event)" 
+    (categoriaEliminada)="eliminarCategoria($event)"
+    (categoriaSubida)="subirCategoria()"></app-lista-categorias>
+    <hr>
+    <h2 class="text-center categoria_tarjeta mt-3">LISTA DE PREGUNTAS FRECUENTES</h2>
+  </div>
+  <div class="container">
+    <div class="row mt-2">
+      <button *ngIf="usuario=='administrador' || permiso_usuario=='true'" type="button" class="btn borde-morado mb-3" id="agregar" (click)="subir_tarjeta()">SUBIR PREGUNTA FRECUENTE</button>
+    </div>
+  </div>
+    <!--Tarjetas-->
+<div class="row mt-5">
+  <div class="col-md-12">
+    <div class="row mt-2">
+      <div class="col-6" *ngFor="let tarjeta of obtenerTarjetasPaginaActual()">
+        <div class="card mb-3 borde_cartas">
+          <div class="card-body">
+              <h4 class="card-title mb-3 mt-3 titulo_tarjeta">{{ tarjeta.titulo }}</h4>
+              <p class="card-text" style="text-align:center;">{{ truncarTexto(tarjeta.descripcion, 100) }}</p>
+              <div class="container">
+                <div class="d-flex justify-content-center">    
+                  <button *ngIf="usuario!='administrador' && permiso_usuario!='true'; else administrador" class="btn fondo_morado boton_menu w-100" (click)="verMas(tarjeta.id_tarjeta)">Ver más
+                    <img src="../../assets/images/ver-lista.png" class="img-fluid" style="max-width: 40px; height:auto; margin-left:5px"/>
+                  </button> 
+                  <ng-template #administrador >
+                    <div class="row">
+                        <div class="table-responsive">
+                          <table style="border:0; margin-left:10px;" class="table">
+                            <tr>
+                              <td>
+                                <button class="btn fondo_morado boton_menu opciones_tabla mb-2" (click)="verMas(tarjeta.id_tarjeta)">Ver más
+                                  <img src="../../assets/images/ver-lista.png" class="img-fluid" style="max-width: 40px; height:auto; margin-left:5px"/>
+                                </button> 
+                              </td>
+                              <td>
+                                <button class="btn fondo_morado boton_menu  opciones_tabla mb-2" (click)="editar(tarjeta.id_tarjeta)">Editar
+                                  <img src="../../assets/images/editar.png" class="img-fluid" style="max-width: 40px; height:auto; margin-left:5px"/>
+                                </button> 
+                              </td>
+                              <td>
+                                <button class="btn fondo_morado boton_menu  opciones_tabla mb-2" (click)="eliminar(tarjeta.id_tarjeta)">Eliminar
+                                  <img src="../../assets/images/eliminar.png" class="img-fluid" style="max-width: 40px; height:auto; margin-left:5px"/>
+                                </button> 
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                    </div>
+                  </ng-template>
+                </div>
+              </div>  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <ul class="pagination justify-content-center align-items-center">
+      <li class="page-item" [ngClass]="{ 'disabled': paginaActual === 1 }">
+        <a class="page-link" (click)="paginaActual = 1">Primera</a>
+      </li>
+      <li class="page-item" [ngClass]="{ 'disabled': paginaActual === 1 }">
+        <a class="page-link" (click)="paginaActual = paginaActual - 1">Anterior</a>
+      </li>
+      <li class="page-item" *ngFor="let pagina of paginas">
+        <a class="page-link" (click)="paginaActual = pagina">{{ pagina }}</a>
+      </li>
+      <li class="page-item" [ngClass]="{ 'disabled': paginaActual === totalPaginas }">
+        <a class="page-link" (click)="paginaActual = paginaActual + 1">Siguiente</a>
+      </li>
+      <li class="page-item" [ngClass]="{ 'disabled': paginaActual === totalPaginas }">
+        <a class="page-link" (click)="paginaActual = totalPaginas">Última</a>
+      </li>
+    </ul>
+  </div>
+</div>
+  </div>
+</div>
+<!-- *********************VENTANA DE VER TARJETA********************* -->
+<div *ngIf="mostrarVentana" class="modal">
+    <div class="card card-medium" id="opciones">
+      <div class="row d-flex justify-content-center align-items-center mb-3">
+        <div class="col">
+          <span class="categoria_tarjeta">Categoría(s):</span>
+          <span *ngFor="let categoria of CategoriasPorTarjeta" class="categoria_tarjeta m-2">{{categoria.nombre}}</span>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center align-items-center">
+        <h3 class="modal-title titulo_tarjeta">{{Tarjeta?.titulo}}</h3>
+        <hr>
+      </div>
+      <div class="row d-flex justify-content-center align-items-center mb-3 mt-3">
+        <p style="text-align:center;">{{Tarjeta?.descripcion}}</p>
+      </div>
+      <div class="row d-flex justify-content-center align-items-center">
+        <button class="btn fondo_morado boton_menu" style="text-decoration: none;" (click)="cerrarMas()">Cerrar</button>
+      </div>
+    </div>
+</div>
+<!-- *********************VENTANA DE EDITAR********************* -->
+<div *ngIf="ventana_editar" class="modal">
+
+  <div class="card card-medium" id="editar_carta">
+    <div class="row mb-3">
+      <span *ngIf="error_editar" class="requisito">*Debe seleccionar al menos una categoría</span><br>
+      <span class="categoria_tarjeta mb-2">{{ txt_editar }}:</span>
+      <div class="d-flex flex-wrap">
+        <div *ngFor="let cat of categoria_editar" class="mr-3">
+          <div class="col md-2">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="cat.seleccionado" [id]="'chk_' + cat.id" (change)="activar_editar()">
+            <label class="form-check-label" style="margin-left: 5px; margin-right: 10px;" [for]="'chk_' + cat.id">
+              {{ cat.nombre }} <span categoria_tarjeta>|</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <span *ngIf="error_editar" class="requisito">*Debe seleccionar al menos un tipo de usuario</span><br>
+    <span class="categoria_tarjeta mb-2" >Usuarios que podrán ver la tarjeta:</span>
+    <div class="row mb-3">
+      <div class="col-md-8">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="estudiantes" [(ngModel)]="estudiantes">
+          <label class="form-check-label" for="estudiantes">Estudiantes | </label>
+        </div>
+        
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="profesores" [(ngModel)]="profesores">
+          <label class="form-check-label" for="profesores">Profesores</label>
+        </div>
+        <br>
+      </div>
+    </div>
+    <hr>
+    <div class="row d-flex justify-content-center align-items-center">
+      <p *ngIf="error_editar" class="requisito">*Obligatorio</p><br>
+      <div class="col-md-3">
+        <h3 class="modal-title titulo_tarjeta">Título:</h3>
+      </div>
+      <div class="col-md-9 d-flex">
+        <textarea [(ngModel)]="titulo" class="areas_editar fs-4" [rows]="calculateRows(titulo)"></textarea>
+      </div>
+    </div>
+    <hr>
+    <div class="row d-flex justify-content-center align-items-center">
+      <span *ngIf="error_editar" class="requisito">*Obligatorio</span><br>
+      <div class="col-md-12">
+        <h3 class="modal-title titulo_tarjeta mb-2">Descripción</h3>
+      </div>
+      <div class="col-md-12 d-flex">
+        <textarea [(ngModel)]="descripcion" class="areas_editar" [rows]="calculateRows(descripcion)"></textarea>
+      </div>
+    </div>
+    <div class="row justify-content-center mb-3 mt-3">
+      <p class="requisito" *ngIf="error_editar">Por favor, verifique la información ingresada</p>
+    </div>
+    <button  id="guardar" class="btn mb-3" style="margin-left: 5px;" (click)="guardar()">Guardar</button>
+    <button class="btn fondo_morado boton_menu" style="text-decoration: none;" (click)="cerrarEditar()">Cerrar</button>
+  </div>
+</div>
+
+<!-- *********************VETANA DE SUBIR TARJETA********************* -->
+<div *ngIf="ventana_subir" class="modal">
+<div class="card card-medium">
+  <div class="row mb-3">
+    <span *ngIf="error_subir" class="requisito">*Debe seleccionar al menos una categoría</span><br>
+    <span class="categoria_tarjeta mb-2">{{ txt_subir }}:</span>
+    <div class="d-flex flex-wrap">
+      <div *ngFor="let cate of categorias_subir" class="mr-3">
+        <div class="col md-2">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="cate.seleccionado" [id]="'chk_' + cate.id" (change)="activar_subir()">
+          <label class="form-check-label" style="margin-left: 5px; margin-right: 10px;" [for]="'chk_' + cate.id">
+            {{ cate.nombre }} <span categoria_tarjeta>|</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <span *ngIf="error_subir" class="requisito">*Debe seleccionar al menos un tipo de usuario</span><br>
+  <span class="categoria_tarjeta mb-2" >Usuarios que podrán ver la tarjeta:</span>
+  <div class="row mb-3">
+    <div class="col-md-8">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="estudiantes_subir" [(ngModel)]="estudiantes_subir">
+        <label class="form-check-label" for="estudiantes_subir">Estudiantes | </label>
+      </div>
+      
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="profesores_subir" [(ngModel)]="profesores_subir">
+        <label class="form-check-label" for="profesores_subir">Profesores</label>
+      </div>
+      <br>
+    </div>
+  </div>
+  <hr>
+  <div class="row d-flex justify-content-center align-items-center">
+    <p *ngIf="error_subir" class="requisito">*Obligatorio</p><br>
+    <div class="col-md-3">
+      <h3 class="modal-title titulo_tarjeta">Título:</h3>
+    </div>
+    <div class="col-md-9 d-flex">
+      <textarea [(ngModel)]="titulo_subir" class="areas_editar fs-4" [rows]="calculateRows(titulo_subir)"></textarea>
+    </div>
+  </div>
+  <hr>
+  <div class="row d-flex justify-content-center align-items-center">
+    <span *ngIf="error_subir" class="requisito">*Obligatorio</span><br>
+    <div class="col-md-12">
+      <h3 class="modal-title titulo_tarjeta mb-2">Descripción</h3>
+    </div>
+    <div class="col-md-12 d-flex">
+      <textarea [(ngModel)]="descripcion_subir" class="areas_editar" [rows]="calculateRows(descripcion_subir)"></textarea>
+    </div>
+  </div>
+  <div class="row justify-content-center mb-3 mt-3">
+    <p class="requisito" *ngIf="error_subir">Por favor, verifique la información ingresada</p>
+  </div>
+  <button  id="subir" class="btn mb-3" style="margin-left: 5px;" (click)="agregar()">Agregar pregunta frecuente</button>
+  <button class="btn fondo_morado boton_menu" style="text-decoration: none;" (click)="cerrarSubir()">Cerrar</button>
+</div>
+</div>
+
+<!-- *********************VENTANA DE SUBIR CATEGORIA********************* -->
+<div *ngIf="ventanaCat_subir" class="modal">
+<div class="card card-medium">
+  <div class="row mb-3">
+    <div class="row">
+      <div class="col-md-4">
+        <h5 for="nombreUsuario" class="cat">Ingrese el nombre de la categoría:</h5>
+        <span *ngIf="error_categoria" class="requisito">*Obligatorio</span><br>
+      </div>
+      <div class="col-md-8">
+        <input type="text" id="nombreUsuario" class="form-control" [(ngModel)]="nombre_cat" placeholder="Nombre categoría">
+      </div>    
+  </div>
+  </div>
+  <hr>
+  <button  id="subir" class="btn mb-3" style="margin-left: 5px;" (click)="agregar_cat()">Agregar categoria</button>
+  <button class="btn fondo_morado boton_menu" style="text-decoration: none;" (click)="cerrarCat_Subir()">Cerrar</button>
+</div>
+</div>
+<!-- *********************VENTANA DE EDITAR CATEGORIA********************* -->
+<div *ngIf="ventanaCat_editar" class="modal">
+<div class="card card-medium">
+  <div class="row mb-3">
+    <div class="row">
+      <div class="col-md-4">
+        <h5 for="nombreUsuario" class="cat">Nombre de la categoría:</h5>
+        <span *ngIf="error_categoria" class="requisito">*Obligatorio</span><br>
+      </div>
+      <div class="col-md-8">
+        <input type="text" id="nombreUsuario" class="form-control" [(ngModel)]="nombre_cat" placeholder="Nombre categoría">
+      </div>    
+    </div>
+  </div>
+  <hr>
+  <button  id="subir" class="btn mb-3" style="margin-left: 5px;" (click)="editar_cat()">Agregar categoria</button>
+  <button class="btn fondo_morado boton_menu" style="text-decoration: none;" (click)="cerrarCat_Editar()">Cerrar</button>
+  </div>
+</div>

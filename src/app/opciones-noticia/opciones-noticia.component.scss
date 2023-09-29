@@ -1,0 +1,59 @@
+span{
+    color:rgb(226, 56, 56);
+}
+.form-check-input{
+    outline-color:rgb(121, 30, 182);
+    border-color:rgb(121, 30, 182);
+}
+.form-check-input:focus{
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+}
+.form-check-input:checked {
+    background-color: rgb(121, 30, 182);
+    border-color:rgb(121, 30, 182);
+}
+  
+.form-check-input:checked + .form-check-label {
+    color:rgb(121, 30, 182);
+    font-weight: bold;
+}
+.casoError{
+    border-color:rgb(240, 35, 35);
+}
+.custom-bg-purple {
+    background-color:rgb(76, 6, 122); 
+}
+#volver{
+    text-align:center; 
+    text-decoration:none; 
+    color:white;
+}
+.sombreado:hover{
+    background-color:rgb(121, 30, 182);
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+}
+textarea{
+    width: 100%;
+}
+#guardar{
+    color:rgb(121, 30, 182);
+    outline-color:rgb(121, 30, 182);
+    border-color:rgb(121, 30, 182);
+}
+#guardar:hover{
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+    background-color:rgb(238, 238, 238);
+}
+.borde-morado:focus{
+    outline-color:rgb(121, 30, 182);
+    border-color:rgb(121, 30, 182);
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+}
+
+.letra-morada{
+    color: rgb(121, 30, 182);;
+}
+input:disabled,
+textarea:disabled {
+  background-color: white;
+}

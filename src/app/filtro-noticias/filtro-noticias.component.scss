@@ -1,0 +1,24 @@
+.custom-search-input:focus, .custom-search-button:focus {
+    outline-color: rgb(76, 6, 122);
+    border-color: rgb(76, 6, 122);
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+}
+.custom-bg-purple {
+    background-color:rgb(76, 6, 122); 
+}
+.borde-morado{
+  color: rgb(76, 6, 122);
+  border-color: rgb(76, 6, 122);
+  text-align: center;
+  height:100%;
+}
+#agregar:hover{
+  background-color: rgb(76, 6, 122);
+  color:white;
+  box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+}
+.borde-morado:focus{
+  outline-color:rgb(121, 30, 182);
+  border-color:rgb(121, 30, 182);
+  box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+}

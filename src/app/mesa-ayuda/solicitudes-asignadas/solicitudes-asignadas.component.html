@@ -1,0 +1,87 @@
+<div class="container-fluid">
+    <div class="card card-container"  [ngClass]="{centrar_verticalmente: cantidad_tickets == 0}">
+      <div *ngIf="cantidad_tickets > 0; else sin_tickets">
+       <!--Aquí se llaman las ventanas emergentes-->
+       <app-crud-tickets 
+        [idTicket]="id_ticket" 
+        [ventana_editarTicket]="ventana_editarTicket"
+        (ventanaEditCerrada)="CierreVentanaEdit()" 
+        [ventana_VerTicket]="ventana_verTicket" 
+        (ventanaVerCerrada)="CierreVentanaVer()">
+      </app-crud-tickets>
+        <div class="row mb-3 mt-5">
+            <h5 class="letra-morada mb-2 mt-2 fs-3">LISTA DE SOLICITUDES ASIGNADAS</h5>
+            <hr>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-9 mb-3">
+              <app-filtros-tickets (filtrosAplicados)="aplicarFiltros($event)"></app-filtros-tickets>
+            </div>
+            <div class="col-md-3">
+              <button type="button" class=" btn btn-danger" style="width:100%;" (click)="volver_MA()">VOLVER</button>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="table-container">
+                <table class="table tabla-tickets">
+                <thead>
+                  <tr>
+                    <th class="encabezado-morado">Token</th>
+                    <th class="encabezado-morado">Usuario</th>
+                    <th class="encabezado-morado">Categoria</th>
+                    <th class="encabezado-morado">Item</th>
+                    <th class="encabezado-morado">Asunto</th>
+                    <th class="encabezado-morado">Fecha Solicitud</th>
+                    <th class="encabezado-morado">Fecha Límite de respuesta</th>
+                    <th class="encabezado-morado">Estado</th>
+                    <th class="encabezado-morado">Prioridad</th>
+                    <th class="encabezado-morado">Opción</th>
+                    <th class="encabezado-morado">Permiso de:</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let ticket of tickets; let i=index">
+                    <td>{{ ticket.token }}</td>
+                    <td>{{ ticket.usuario.name}}</td>
+                    <td>{{ ticket.categoria.nombre}}</td>
+                    <td>{{ ticket.item!=null ? ticket.item.nombre:"N/A"}}</td>
+                    <td>{{ ticket.asunto}}</td>
+                    <td><input type="date" class="fecha" disabled="true"  [value]="ticket.fecha_solicitud ? ticket.fecha_solicitud.toISOString().substring(0, 10) : ''" /></td>
+                    <td>
+                        <input type="date" [value]="ticket.fecha_limite.toISOString().substring(0, 10)" class="fecha" disabled="true"/>
+                    </td>
+                    <td><span style="font-weight:bold;">{{ ticket.estado.nombre }}</span><br/>
+                      <img *ngIf="ticket.estado.nombre=='Pendiente'" src="../../../assets/images/reloj.png" class="img-fluid" style="max-width: 40px;">
+                      <img *ngIf="ticket.estado.nombre=='En proceso'" src="../../../assets/images/trabajo-en-progreso.png" class="img-fluid" style="max-width: 40px;">
+                      <img *ngIf="ticket.estado.nombre=='Completada'" src="../../../assets/images/correcto.png" class="img-fluid" style="max-width: 40px;">
+                    </td>
+                    <td>
+                      <span style="font-weight:bold;">{{ticket.prioridad.nombre}}</span><br/>
+                      <img *ngIf="ticket.prioridad.nombre=='Baja'" src="../../../assets/images/relajarse.png" class="img-fluid" style="max-width: 40px;">
+                      <img *ngIf="ticket.prioridad.nombre=='Media'" src="../../../assets/images/advertencia.png" class="img-fluid" style="max-width: 40px;">
+                      <img *ngIf="ticket.prioridad.nombre=='Alta'" src="../../../assets/images/alerta.png" class="img-fluid" style="max-width: 40px;">
+                    </td>
+                    <td><button class="btn btn-primary" (click)="ver_ticket(ticket)">Ver detalles</button></td>
+                    <td>
+                      <div class="row">
+                        <div class="col">
+                          <button class="btn opciones-admin" (click)="editar_ticket(ticket.token)">Editar</button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table> 
+            </div>
+          </div>
+        </div>
+        <ng-template #sin_tickets>
+          <div class="col d-flex flex-column align-items-center justify-content-center text-center">
+              <h5 class="sin_tickets mt-2">En la actualidad no tiene Tickets pendientes</h5>
+              <img src="../../../assets/images/advertencia.png" alt="Advertencia" class="img-fluid" style="max-width: 150px;">
+              <button type="button" class=" btn boton-morado" style="width:100%;" (click)="volver_MA()">VOLVER</button>
+          </div>
+        </ng-template>
+    </div>
+</div>

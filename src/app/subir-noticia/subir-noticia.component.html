@@ -1,0 +1,51 @@
+
+<div class="container align-items-center justify-content-center mt-3" style="margin-top:70px;">
+  <div class="card bg-white p-5 rounded-5">
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <h3 class="letra-morada">Título <span>* <span *ngIf="error" style="font-size:20px;">Obligatorio</span></span></h3>
+      </div>
+      <div class="col-md-8">
+        <textarea [ngClass]="{casoError:error==true}" id="titulo" class="fs-4 form-control borde-morado" type="text" placeholder="Título de la noticia..." [(ngModel)]="titulo"></textarea>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <h3 class="letra-morada">Descripción <span>* <span *ngIf="error" style="font-size:20px;">Obligatorio</span></span></h3>
+      </div>
+      <div class="col-md-8">
+        <textarea [ngClass]="{casoError:error==true}" id="descripcion" class="form-control borde-morado" placeholder="Descripción de la noticia..." [(ngModel)]="descripcion"></textarea>
+    </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <h3 class="letra-morada">¿Quiénes podrán ver la noticia? <span>* <span *ngIf="error" style="font-size:20px;">Obligatorio</span></span></h3>
+      </div>
+      <div class="col-md-8">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="todos" [(ngModel)]="todos" name="todos" (click)="activar_todos()">
+          <label class="form-check-label" for="todos">Todos</label>
+        </div>
+        <br/>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="estudiantes" [(ngModel)]="estudiantes" name="estudiantes">
+          <label class="form-check-label" for="estudiantes">Estudiantes</label>
+        </div>
+        <br>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="profesores" [(ngModel)]="profesores" name="profesores">
+          <label class="form-check-label" for="profesores">Profesores</label>
+        </div>
+        <br>
+      </div>
+    </div>
+    
+    <app-pdf-noticia #pdfComponent [opcion]=null></app-pdf-noticia>
+    <div class="row justify-content-center mb-3 mt-3">
+      <h3 class="text-center" *ngIf="error" style="font-size: 20px; color:red;">Por favor, verifique la información ingresada</h3>
+    </div>
+    
+    <button id="guardar" class="btn mb-3" style="margin-left: 5px;" (click)="subir_noticia()">Subir noticia</button>
+    <button class="btn custom-bg-purple sombreado" style="margin-left: 5px;" (click)="volver()">Volver</button>
+  </div>
+</div>

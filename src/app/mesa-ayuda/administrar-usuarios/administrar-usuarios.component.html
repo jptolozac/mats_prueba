@@ -1,0 +1,294 @@
+<!--Ventana principal de cambiar clave de usuarios-->
+<div *ngIf="ventana_cambiarPassword" class="modal d-flex align-items-center justify-content-center">
+    <div class="card card-little" style="padding:20px;">
+        <div class="container">
+            <div class="row mb-3">
+                <h5 class="letra-morada fs-3" style="text-align:center;">CAMBIAR CONTRASEÑA</h5>
+                <hr/>
+        </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="mb-3">
+                    <h5 class="letra-morada mb-2">
+                        Cambiar constraseña (opcional):
+                    </h5>
+                    <input type="password" class="form-control" placeholder="Nueva contraseña..." [(ngModel)]="txt_password">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="mb-3">
+                    <h5 class="letra-morada mb-2">
+                        Confirmar contraseña:
+                    </h5> <span class="mb-2" *ngIf="error==true"  [ngClass]="{'obligatorio': error}">* Obligatorio <br></span> <label id="confirmar" class="mb-2" *ngIf="txt_password!=txt_confirmarPassword"> No coincide con la contraseña ingresada</label>
+                    <input type="password" class="form-control" placeholder="Nueva contraseña..." [(ngModel)]="txt_confirmarPassword">
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-12 mb-3">
+                <button class="btn boton_morado" (click)="nueva_password()" style="width:100%;">GUARDAR CAMBIOS</button>
+            </div>
+            <div class="col-md-12">
+                <button class="btn borde-morado" (click)="cerrar_password()" style="width:100%;">CERRAR</button>
+            </div>
+        </div>
+    </div>
+</div>   
+<!--Ventana principal de administrar usuarios-->
+<div *ngIf="ventana_administrar" class="modal">
+    <div class="card card-larga" style="padding:20px;">
+        <div class="container">
+            <div class="row mb-3">
+                    <h5 class="letra-morada fs-3" style="text-align:center;">ADMINISTRAR USUARIOS</h5>
+                    <hr/>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">
+                <button class="btn btn-danger" (click)="cerrar()" style="width:100%;">CERRAR</button>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">
+                <button class="btn borde-morado" style="width:100%;" (click)="crear_usuario()">CREAR USUARIO</button>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <div class="input-group">
+                  <input id="buscar" type="text" class="form-control" placeholder="Buscar usuario por correo..." style="margin-right:3px;" [(ngModel)]="txt_buscar">
+                  <div class="input-group-append">
+                    <button (click)="buscar()" class="btn boton_morado" type="button"><img src="../../assets/images/buscar.png" style ="height:2rem;"></button>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <!-- Ventana para modificar un usuario -->
+        <div *ngIf="encontrado; else sin_encontrar">
+            <div class="row mt-4">
+                <h5 class="letra-morada fs-3" style="text-align:center;">INFORMACIÓN DEL USUARIO</h5>
+                <hr/>
+            </div>
+            <div class="row">
+                <div class="col-md-4 d-flex align-items-center justify-content-center">
+                    <img src="../../../assets/images/agregar-usuario.png" alt="Imagen de agregar usuario" class="img-fluid imagen-mediana" />
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <h5 class="letra-morada mb-2">
+                                    ID:
+                                </h5>
+                                <input disabled="true" class="form-control" value="{{usuario?.id_usuario}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <h5 class="letra-morada mb-2">
+                                    Nombre:
+                                </h5> <span *ngIf="error==true"  [ngClass]="{'obligatorio': error}">* Obligatorio</span>
+                                <input [ngClass]="{'borde-rojo': error}" [disabled]="bloquear" type="text" class="form-control" placeholder="Nombre..." [(ngModel)]="txt_nombre">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <h5 class="letra-morada mb-2">
+                                    Correo:
+                                </h5> <span *ngIf="error==true"  [ngClass]="{'obligatorio': error}">* Obligatorio</span>
+                                <input [ngClass]="{'borde-rojo': error}" [disabled]="bloquear" type="text" class="form-control" placeholder="Correo..." [(ngModel)]="txt_correo">
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="bloquear==false">
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <h5 class="letra-morada mb-2">
+                                        Cambiar constraseña (opcional):
+                                    </h5>
+                                    <input [disabled]="bloquear" type="password" class="form-control" placeholder="Nueva contraseña..." [(ngModel)]="txt_password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <h5 class="letra-morada mb-2">
+                                        Confirmar contraseña:
+                                    </h5> <span class="mb-2" *ngIf="error==true"  [ngClass]="{'obligatorio': error}">* Obligatorio <br></span> <label id="confirmar" class="mb-2" *ngIf="txt_password!=txt_confirmarPassword"> No coincide con la contraseña ingresada</label>
+                                    <input [disabled]="bloquear" type="password" class="form-control" placeholder="Nueva contraseña..." [(ngModel)]="txt_confirmarPassword">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="row mb-5">
+                <div class="col-md-12 mb-3">
+                  <h5 class="letra-morada">Seleccione el tipo de usuario:</h5>
+                </div>
+                <div class="col-md-12">
+                    <select class="form-select borde-morado" [(ngModel)]="id_tipo" [disabled]="bloquear" [ngClass]="{'bloqueado': bloquear}" style="width:100%;">
+                        <option value="3" [selected]="id_tipo === 3">Estudiante</option>
+                        <option value="2" [selected]="id_tipo === 2">Profesor</option>
+                        <option value="null" [selected]="id_tipo === null">Administrador</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="col-md-12 mb-3">
+                  <h5 *ngIf="bloquear;" class="letra-morada">Permisos del usuario:</h5>
+                  <h5 *ngIf="bloquear==false;" class="letra-morada">Seleccione los permisos del usuario: <span *ngIf="cantidad_permisos>0">( {{cantidad_permisos}} )</span></h5>
+                </div>
+                <div *ngIf="bloquear==false; else sin_bloquear">
+                    <div class="col-md-12">
+                        <div class="form-check">
+                            <input [disabled]="bloquear" id="p_n" type="checkbox" class="form-check-input" [(ngModel)]="permiso_noticias" (change)="activar()">
+                            <label class="form-check-label" for="p_n">Permiso de Noticias</label>
+                        </div>                    
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-check">
+                            <input [disabled]="bloquear" id="p_f" type="checkbox" class="form-check-input" [(ngModel)]="permiso_preguntas" (change)="activar()">
+                            <label class="form-check-label" for="p_n">Permiso de Preguntas Frecuentes</label>
+                        </div>                    
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-check">
+                            <input [disabled]="bloquear" id="p_ma" type="checkbox" class="form-check-input" [(ngModel)]="permiso_MA" (change)="activar()">
+                            <label class="form-check-label" for="p_n">Permiso de Mesa de Ayuda</label>
+                        </div>                    
+                    </div>
+                </div>
+                <ng-template #sin_bloquear>
+                    <div class="row">
+                        <ul>
+                            <li *ngIf="cantidad_permisos==0">Ninguno</li>
+                            <li *ngIf="permiso_noticias">Permiso de Noticias</li>
+                            <li *ngIf="permiso_preguntas">Permiso de Preguntas Frecuentes</li>
+                            <li *ngIf="permiso_MA">Permiso de Mesa de Ayuda</li>
+                        </ul>
+                    </div>
+                </ng-template>
+            </div>
+            
+            <div *ngIf="bloquear; else guardar">
+                <div class="row mb-3">
+                    <div class="col-md-6 mb-3">
+                        <button class="btn borde-morado" style="width:100%;" (click)="editar()">Editar</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn boton_morado" style="width:100%;" (click)="eliminar()">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+            <ng-template #guardar>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <button class="btn borde-morado"  style="width:100%;" (click)="guardar_cambios()">Guardar</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn boton_morado" (click)="cancelar()" style="width:100%;">Cancelar</button>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+        <ng-template #sin_encontrar>
+            <div class="row vh-100">
+                <div class="col d-flex flex-column align-items-center justify-content-center text-center">
+                  <h5 class="fs-3 text-muted">Para modificar un usuario existente, es necesario primero buscarlo utilizando su correo institucional</h5>
+                  <br/>
+                  <img src="../../../assets/images/desconocido.png" alt="Advertencia" class="img-fluid" style="max-width: 200px;">
+                </div>
+              </div>
+        </ng-template>
+         
+    </div>   
+</div>
+<!-- Ventana para crear un usuario-->
+<div *ngIf="ventana_crear" class="modal">
+    <div class="card card-larga" style="padding:20px;">
+        <div class="row">
+            <h5 class="letra-morada fs-3" style="text-align:center;">FORMULARIO DE REGISTRO</h5>
+            <hr/>
+        </div>
+        <div class="row">
+            <div class="col-md-4 d-flex align-items-center justify-content-center">
+                <img src="../../../assets/images/agregar-usuario.png" alt="Imagen de agregar usuario" class="img-fluid imagen-mediana" />
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <h5 class="letra-morada mb-2">
+                                Nombre:
+                            </h5> <span *ngIf="error==true"  [ngClass]="{'obligatorio': error}">* Obligatorio</span>
+                            <input [ngClass]="{'borde-rojo': error}" type="text" class="form-control" placeholder="Nombre..." [(ngModel)]="txt_nombre">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <h5 class="letra-morada mb-2">
+                                Correo:
+                            </h5> <span *ngIf="error==true"  [ngClass]="{'obligatorio': error}">* Obligatorio</span>
+                            <input [ngClass]="{'borde-rojo': error}" type="text" class="form-control" placeholder="Correo..." [(ngModel)]="txt_correo">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <h5 class="letra-morada mb-2">
+                                Constraseña:
+                            </h5> <span *ngIf="error==true"  [ngClass]="{'obligatorio': error}">* Obligatorio</span>
+                            <input [ngClass]="{'borde-rojo': error}" type="password" class="form-control" placeholder="Contraseña..." [(ngModel)]="txt_password">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <h5 class="letra-morada mb-2">
+                                Confirmar constraseña:
+                            </h5> <span class="mb-2" *ngIf="error==true"  [ngClass]="{'obligatorio': error}">* Obligatorio <br></span> <label id="confirmar" class="mb-2" *ngIf="txt_password!=txt_confirmarPassword"> No coincide con la contraseña ingresada</label>
+                            <input [ngClass]="{'borde-rojo': error}" type="password" class="form-control" placeholder="Contraseña..." [(ngModel)]="txt_confirmarPassword">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-md-12 mb-3">
+              <h5 class="letra-morada">Seleccione el tipo de usuario:</h5> <span *ngIf="error==true"  [ngClass]="{'obligatorio': error}">* Obligatorio</span>
+            </div>
+            <div class="col-md-12">
+              <select [ngClass]="{'borde-rojo': error}" class="form-select borde-morado" (change)="cargar_tipoUsuario($event)">
+                <option selected value="3">Estudiante</option>
+                <option value="2">Profesor</option>
+                <option value="null">Administrador</option>
+              </select> 
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <button class="btn borde-morado" (click)="registrar_usuario()" style="width:100%;">REGISTRAR</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn boton_morado" (click)="cerrar_crear()" style="width:100%;">CERRAR</button>
+            </div>
+        </div>
+    </div>
+</div>    

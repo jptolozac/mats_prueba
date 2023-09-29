@@ -1,0 +1,71 @@
+<app-administrar-usuarios
+            [ventana_cambiarPassword]="ventana_cambiarPassword"
+            (ventanaPasswordCerrada)="cerrar_password()"
+        >
+</app-administrar-usuarios> 
+<div class="container-fluid mt-3 mb-3">
+    <div class="card">
+        <div class="row">
+            <div class="col-md-12">
+                <h5>Información del {{tipo_usuario}}</h5>
+                <br/>
+            </div>
+            <div class="col-md-1">
+                <label>Nombre:</label>
+            </div>
+            <div class="col-md-3">
+                <label>{{nombre}}</label>
+            </div> 
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+                <label>Correo:</label>
+            </div>
+            <div class="col-md-3">
+                <label>{{correo}}</label>
+            </div> 
+        </div>
+        <div class="row mt-4 mb-2">
+            <div *ngIf="tipo_usuario=='administrador'" class="col-md-3">
+                <button style="width:100%;" class="btn borde-morado" (click)="editar()">EDITAR INFORMACIÓN PERSONAL</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <button style="width:100%;" class="btn borde-morado" (click)="cambiar_password()">CAMBIAR CONTRASEÑA</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Ventana de editar-->
+<div *ngIf="ventana_editar" class="modal">
+    <div class="card card-medium">
+      <div class="row mb-3">
+        <div class="row">
+            <div class="col-md-12">
+                <h5 id="titulo_editar">Información del usuario</h5>
+                <hr/>
+            </div>
+            <div class="col-md-2">
+                <label>Nombre: <span *ngIf="error" class="obligatorio">* Obligatorio </span></label>
+            </div>
+            <div class="col-md-5">
+                <input [ngClass]="{'borde-rojo': error}" type="text" class="form-control d-flex" placeholder="Nombre del usuario" [(ngModel)]="nombre_editar">
+            </div> 
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-2">
+                <label>Correo: <span *ngIf="error" class="obligatorio">* Obligatorio </span></label>
+            </div>
+            <div class="col-md-5">
+                <input [ngClass]="{'borde-rojo': error}" type="text" class="form-control d-flex" placeholder="Correo del usuario" [(ngModel)]="correo_editar">
+            </div> 
+        </div>
+      </div>
+      <hr>
+      <button  id="guardar" class="btn mb-3" (click)="guardar()">GUARDAR</button>
+      <button class="btn borde-morado" (click)="cerrar()">CERRAR</button>
+    </div>
+  </div>
+

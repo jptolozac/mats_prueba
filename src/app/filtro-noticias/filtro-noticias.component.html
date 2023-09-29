@@ -1,0 +1,26 @@
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card border-0">
+      <div class="card-body">
+        <div class="input-group">
+          <div aria-label="Default select example">
+            <select class="form-select borde-morado" (change)="cargar_cantidad($event)">
+              <option selected value="null">Cantidad de noticias ({{ total_noticias }})</option>
+              <ng-container *ngFor="let cantidad of cantidad_noticias">
+                <option [value]="cantidad">{{ cantidad }}</option>
+              </ng-container>
+            </select>
+          </div>
+          &nbsp;
+            <input type="text" class="form-control custom-search-input" placeholder="Buscar..." style="margin-right:3px;" [(ngModel)]="txt_buscar">
+            <div class="input-group-append">
+              <button class="btn custom-bg-purple text-white custom-search-button" type="button"><img src="../../assets/images/lupa.png" style ="height:2rem;" (click)="enviar()"></button>
+            </div>  
+        </div>
+        <div class="row mt-3">
+          <button *ngIf="tipo_usuario=='administrador' || permiso_usuario" type="button" class="btn borde-morado mb-3" id="agregar" (click)="subir_noticia()">SUBIR NOTICIA</button>
+        </div> 
+      </div>
+    </div>
+</div>
+  

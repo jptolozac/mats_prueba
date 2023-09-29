@@ -1,0 +1,87 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    //align-items: center;
+}
+.card-medium {
+    width: 700px; /* Ajusta el ancho según tus necesidades */
+    margin: 0 auto; /* Centrar horizontalmente */
+    padding: 20px; /* Añade un espacio interno para mejorar el aspecto */
+    overflow-y:auto;
+    height: 700px;
+    max-height: 90%;
+    margin-top: 3%;
+}
+.card-little{
+    width: 700px; /* Ajusta el ancho según tus necesidades */
+    margin: 0 auto; /* Centrar horizontalmente */
+    padding: 20px; /* Añade un espacio interno para mejorar el aspecto */
+    overflow-y:auto;
+    height: 350px;
+    max-height: 90%;
+    margin-top: 10%;
+}
+.letra-morada{
+    color:rgb(76, 6, 122); 
+}
+td{
+    text-align: center;
+    border-collapse: collapse;
+    border: 1px solid #000000;
+}
+.encabezado-morado{
+    background-color: rgb(76, 6, 122);
+    color:white;
+    text-align: center;
+    border: 1px solid #000000;
+}
+.tabla-categorias{
+    border-collapse: collapse;
+    border: 1px solid #000000;
+
+}
+.boton-tabla{
+    border-color:rgb(76, 6, 122); 
+    outline-color: rgb(76, 6, 122);
+    background-color: white;
+    color:rgb(76, 6, 122);
+    width: 100%;
+}
+.boton-tabla:hover{
+    background-color: rgb(206, 203, 207);
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+}
+.boton_morado{
+    background-color:rgb(76, 6, 122);
+    color: white;
+}
+.boton_morado:hover{
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+    background-color: rgb(101, 35, 145); 
+}
+.borde-morado{
+    border-color: rgb(76, 6, 122);
+    color: rgb(76, 6, 122);
+    background-color: white;
+}
+.borde-morado:hover{
+    background-color: rgb(206, 203, 207);
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+}
+.form-control:focus{
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+    border-color: rgb(101, 35, 145); 
+}
+.obligatorio{
+    color:rgb(172, 14, 14);
+}
+.borde-rojo{
+    outline-color:rgb(172, 14, 14); 
+    border-color: rgb(172, 14, 14);
+}

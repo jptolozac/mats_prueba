@@ -1,0 +1,54 @@
+.card{
+    padding: 20px;
+}
+.borde-morado{
+    border-color: rgb(76, 6, 122);
+    color: rgb(76, 6, 122);
+    background-color: white;
+}
+.borde-morado:hover{
+    background-color: rgb(206, 203, 207);
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+}
+.card-medium {
+    width: 700px; /* Ajusta el ancho según tus necesidades */
+    margin: 0 auto; /* Centrar horizontalmente */
+    padding: 20px; /* Añade un espacio interno para mejorar el aspecto */
+    overflow-y:auto;
+    max-height: 90%;
+}
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#titulo_editar{
+    text-align: center;
+    color:rgb(76, 6, 122);
+}
+input:focus{
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+    outline-color:rgb(76, 6, 122); 
+    border-color: rgb(76, 6, 122);
+}
+#guardar{
+    background-color: rgb(76, 6, 122); 
+    color:white;
+}
+#guardar:hover{
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+    background-color: rgb(101, 35, 145); 
+}
+.obligatorio{
+    color:rgb(172, 14, 14);
+}
+.borde-rojo{
+    outline-color:rgb(172, 14, 14); 
+    border-color: rgb(172, 14, 14);
+}

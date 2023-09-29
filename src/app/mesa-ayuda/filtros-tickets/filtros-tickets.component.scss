@@ -1,0 +1,31 @@
+.borde-morado{
+    border-color: rgb(76, 6, 122);
+    outline-color: rgb(76, 6, 122);
+    text-align: center;
+    color:rgb(76, 6, 122);
+}
+.borde-morado:hover{
+    background-color: rgb(206, 203, 207);
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+}
+.borde-morado:focus{
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+}
+.filtros-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre elementos */
+}
+.boton-morado{
+    background-color:rgb(76, 6, 122);
+    color:white;
+}
+.boton-morado:hover{
+    background-color:rgb(118, 31, 175);
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+}
+input:focus{
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+    outline-color:rgb(76, 6, 122); 
+    border-color: rgb(76, 6, 122);
+}

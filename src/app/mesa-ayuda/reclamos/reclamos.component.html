@@ -1,0 +1,155 @@
+<!--Ventana para agregar un reclamo-->
+<div *ngIf="abrir_realizarReclamo" class="modal">
+    <div class="card card-medium">
+      <div class="row mb-3">
+        <div class="row">
+            <div class="col-md-12 mb-1">
+                <h5 class="titulo fs-3">RECLAMO</h5>
+                <hr/>
+            </div>
+            <div class="col-md-12">
+                <p id="reclamo">Todos los reclamos son anónimos.</p>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-12">
+              <h3 class="letra-morada" style="text-align:center;">Asunto:</h3><span *ngIf="error_crearReclamo" class="obligatorio">* Obligatorio </span><br/>
+            </div>
+            <div class="col-md-12 mt-2">
+              <textarea [ngClass]="{'borde-rojo':error_crearReclamo}"  type="text" class="form-control" [(ngModel)]="asunto" placeholder="Asunto del Reclamo..."></textarea>
+            </div>
+          </div>
+        <div class="row mb-3">
+            <div class="col-md-12">
+              <h3 class="letra-morada" style="text-align:center;">Descripción:</h3><span *ngIf="error_crearReclamo" class="obligatorio">* Obligatorio </span><br/>
+            </div>
+            <div class="col-md-12 mt-2">
+                <textarea [ngClass]="{'borde-rojo':error_crearReclamo}"  type="text" class="form-control" [(ngModel)]="descripcion" placeholder="Descripción..."></textarea>
+            </div>
+        </div>
+        <div class="card-footer mt-auto">
+          <div class="row">
+            <div class="col">
+              <button class="btn borde-morado" style="text-decoration: none; width:100%;" (click)="reclamar()">REALIZAR RECLAMO</button>
+            </div>
+          </div> 
+            <div class="row">
+              <div class="col">
+                <button class="btn boton_morado mt-3" style="text-decoration: none; width:100%;" (click)="cerrar_crearReclamo()">CERRAR</button>
+              </div>
+            </div> 
+          </div>
+      </div>
+    </div>
+</div>
+<!--Ventana lista de reclamos-->
+<div *ngIf="lista_reclamos" class="modal">
+  <div class="card card-medium">
+    <div *ngIf="cantidad_quejas>0; else sin_quejas">
+      <div class="row mb-3">
+          <div class="col-md-12 mb-2">
+              <h5 class="titulo fs-3">LISTA DE RECLAMOS</h5>
+              <hr/>
+          </div>
+          <div class="col-md-12 mb-2">
+              <p id="reclamo">Todos los reclamos son anónimos.</p>
+          </div>
+          <div class="col-md-12 mb-2">
+            <button class="btn btn-danger" style="width: 100%;" (click)="cerrar_listaQuejas()">CERRAR</button>
+          </div>
+      </div>
+      <div class="row mb-5">
+        <div class="col-md-8">
+          <select class="form-select borde-morado" [(ngModel)]="estado_seleccionado">
+            <option [ngValue]="null">Todos los reclamos</option>
+            <option [ngValue]="true">Vistos</option>
+            <option [ngValue]="false">Sin ver</option>
+          </select>          
+        </div>
+        <div class="col-md-4">
+          <button  class="btn boton_morado" style="width:100%" (click)="filtrar()">FILTRAR</button>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="table-container">
+          <table class="table tabla-tickets">
+            <thead>
+              <tr>
+                <th class="encabezado-morado">Asunto</th>
+                <th class="encabezado-morado">Estado</th>
+                <th class="encabezado-morado">Opción</th>
+              </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí puedes utilizar *ngFor para iterar sobre los registros de tu base de datos -->
+                <tr *ngFor="let queja of quejas; let i=index">
+                  <td>{{ queja.asunto}}</td>
+                  <td>{{ queja.visto==true ? "Visto":"Sin ver"}}</td>
+                  <td><button class="btn borde-morado" style="width: 100%;" (click)="ver_queja(queja.id_queja)">Ver detalles</button>
+                    <button class="btn borde-morado mt-2" style="width: 100%;" (click)="eliminar_queja(queja.id_queja)">Eliminar</button></td>
+                </tr>
+            </tbody>         
+          </table>
+        </div>   
+      </div>
+    </div>  
+    <ng-template #sin_quejas>
+      <div class="row">
+        <div class="col d-flex flex-column align-items-center justify-content-center text-center">
+          <h5 class="fs-3 mt-2 mb-2">Actualmente no hay quejas registradas</h5>
+          <img src="../../../assets/images/relajarse.png" alt="Advertencia" class="img-fluid" style="max-width: 150px;">
+        </div>
+        <div class="col-md-12 mt-4">
+          <button class="btn boton_morado" style="width: 100%;" (click)="cerrar_listaQuejas()">CERRAR</button>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>    
+<!--Ventana con los detalles de un reclamo-->
+<div *ngIf="detalles_reclamo" class="modal">
+  <div class="card card-medium">
+    <div class="row mb-3">  
+      <div class="col-md-12">
+        <h5 class="titulo fs-3">DETALLES</h5>
+        <hr/>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <h5 class="letra-morada">Asunto:</h5>
+      </div>
+      <div class="col-md-8">
+        <textarea disabled="true">{{reclamo?.asunto}}</textarea>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <h5 class="letra-morada">Descripción:</h5>
+      </div>
+      <div class="col-md-8">
+        <textarea disabled="true">{{reclamo?.descripcion}}</textarea>
+      </div>
+    </div>
+    <div class="row mb-5">
+      <div class="col-md-4">
+        <h5 class="letra-morada">Estado:</h5>
+      </div>
+      <div class="col-md-8">
+        <select class="form-select borde-morado" [(ngModel)]="estado_reclamo" (change)="marcar_visto($event)">
+          <option [value]="true" [selected]="estado_reclamo === true">Visto</option>
+          <option [value]="false" [selected]="estado_reclamo === false">Sin ver</option>
+        </select>
+      </div> 
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 mb-2">
+        <button class="btn borde-morado" style="width: 100%;" (click)="guardar()">Guardar</button>
+      </div>
+      <div class="col-md-12 mb-2">
+        <button class="btn boton_morado" style="width: 100%;" (click)="cerrar_verQueja()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>  

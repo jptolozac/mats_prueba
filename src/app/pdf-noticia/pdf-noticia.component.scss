@@ -1,0 +1,34 @@
+.file-drop-container {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.file-drop-container p {
+  font-size: 16px;
+}
+
+.file-info {
+  display: flex;
+  align-items: center;
+}
+
+.file-icon {
+  margin-right: 10px;
+}
+
+.delete-button {
+  margin-left: 10px;
+}
+img {
+  width: 50px; /* Ajusta el tamaño de la imagen según tus necesidades */
+  height: auto; /* La altura se ajustará automáticamente según el tamaño de la imagen */
+  display: block; /* Para asegurarse de que la imagen se comporte como un bloque */
+  max-width: 50px; /* Para garantizar que la imagen sea responsiva */
+}
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

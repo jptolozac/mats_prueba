@@ -1,0 +1,26 @@
+<div class="file-drop-container mb-3" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
+  <!-- Mensaje de arrastra y suelta -->
+  <ng-container *ngIf="!selectedFile">
+    <p>Arrastra y suelta el archivo aquí</p>
+    <!-- Input de selección de archivo -->
+    <input type="file" (change)="onFileSelected($event)" accept=".pdf">
+  </ng-container>
+  <!-- Información del archivo seleccionado -->
+  <div class="center-container">
+    <div class="file-info" *ngIf="selectedFile">
+      <div class="file-icon">
+        <img src="../../assets/images/archivo-pdf.png" alt="PDF Icon">
+      </div>
+      <div class="file-details">
+        <p>{{ selectedFile.name }}</p>
+      </div>
+      <button class="delete-button btn btn-danger" (click)="eliminarArchivo()">Eliminar</button>
+    </div>
+  </div>
+  
+  <!-- Mostrar el PDF si está cargado -->
+  
+  <div *ngIf="pdfURL">
+    <iframe [src]="pdfURL" width="100%" height="500px" frameborder="0"></iframe>
+  </div>
+</div>

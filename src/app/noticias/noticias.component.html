@@ -1,0 +1,78 @@
+<app-filtro-noticias (tam)="setCantidadNoticias($event)" (enviarTexto)="buscar($event)" [total_noticias]="getCantidadNoticias()"></app-filtro-noticias>
+<div class="container"> 
+    <div class="row justify-content-center">
+      <div class="col">
+        <ng-container *ngFor="let noticia of getNoticias(); let i=index; let last=last">
+        <div class="card mb-3" *ngIf="i<getCantidadNoticias() && i>=getInicio() && i<=getFin()">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-9 mb-3">
+                <h5 class="card-title">{{i+1}}).Título:{{noticia.titulo}}</h5>
+                <p class="card-text">Fecha: {{noticia.fecha}}</p>
+                <hr/>
+                <p class="card-text">Descripción:{{Descripcion(noticia.descripcion)}}</p>
+              </div>
+              <div class="col-md-3">
+                <div class="table-responsive">
+                <table style="border:0;" class="table">
+                  <tr>
+                    <td colspan="2" *ngIf="token != '' && (permiso_usuario == 'true' || getTipoUsuario() == 'administrador'); else normal">
+                      <button (click)="opcionNoticia(noticia.id, 'ver')" class="btn custom-bg-purple sombreado" style="margin-left: 5px; display: flex; align-items: center;">
+                        <span style="flex: 1;" class="opciones">Ver</span>
+                        <img src="../../assets/images/ver-lista.png" class="img-fluid" style="max-width: 40px; height:auto; margin-left:5px"/>
+                      </button>
+                    </td>
+                    <ng-template #normal>
+                      <td>
+                        <button (click)="opcionNoticia(noticia.id, 'ver')" class="btn custom-bg-purple sombreado" style="margin-left: 5px; display: flex; align-items: center;">
+                          <span style="flex: 1;" class="opciones">Ver</span>
+                          <img src="../../assets/images/ver-lista.png" class="img-fluid" style="max-width: 40px; height:auto; margin-left:5px"/>
+                        </button>
+                      </td>
+                    </ng-template>
+                    <td>
+                      <button *ngIf="token != '' && getTipoUsuario() != 'administrador'" class="btn custom-bg-purple sombreado" style="margin-left: 5px; display: flex; align-items: center;" (click)="apoyar(i, noticia.id)"> <!-- (permiso_usuario != 'true' || getTipoUsuario() != 'administrador')-->
+                        <span style="flex: 1;" class="opciones">Apoyar</span>
+                        <img [src]="getImagenActual(i)" class="img-fluid" style="max-width: 40px; height:auto; margin-left:5px"/> 
+                      </button>
+                    </td> 
+                  </tr>
+                  <tr *ngIf="getTipoUsuario()=='administrador'"><!--  || permiso_usuario == 'true' -->
+                    <td>
+                      <button (click)="opcionNoticia(noticia.id, 'editar')" class="btn opciones_administrador" style="margin-left: 5px; display: flex; align-items: center;">
+                        <span style="flex: 1;" class="opciones_admin">Editar</span>
+                        <img src="../../assets/images/editar.png" class="img-fluid" style="max-width: 40px; height:auto; margin-left:5px"/> 
+                      </button>
+                    </td>
+                    <td>
+                      <button class="btn opciones_administrador" style="margin-left: 5px; display: flex; align-items: center;" (click)="eliminar(noticia.id)">
+                        <span style="flex: 1;" class="opciones_admin">Eliminar</span>
+                        <img src="../../assets/images/eliminar.png" class="img-fluid" style="max-width: 40px; height:auto; margin-left:5px"/> 
+                      </button>
+                    </td>
+                  </tr>
+                </table>
+              </div>                
+              </div>
+            </div>
+          </div>
+        
+        </div>   
+      </ng-container>     
+
+
+      </div>
+      <section class="paginacion">
+        <p id="numero_pagina">Página {{getPagina()}} de 5</p>
+      <div class="col-md-12">
+        <ul>
+          <li class="page-item" *ngIf="activar1" (click)="paginacion(1)">1</li>
+          <li class="page-item" *ngIf="activar2" (click)="paginacion(2)">2</li>
+          <li class="page-item" *ngIf="activar3" (click)="paginacion(3)">3</li>
+          <li class="page-item" *ngIf="activar4" (click)="paginacion(4)">4</li>
+          <li class="page-item" *ngIf="activar5" (click)="paginacion(5)">5</li>
+        </ul>
+      </div>
+    </section>
+    </div>
+</div>

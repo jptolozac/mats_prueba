@@ -1,0 +1,119 @@
+<div *ngIf="abrir_ventana" class="modal">
+    <div class="card card-medium">
+      <div class="row mt-3 mb-3">
+        <h5 class="letra-morada fs-4" style="text-align:center;">CARGA USUARIOS</h5>
+        <hr />
+      </div>
+      <div class="row mb-2">
+        <div class="col-md-12">
+          <button type="button" class="btn btn-danger" (click)="cerrar()" style="width:100%;">Cerrar</button>
+        </div>
+      </div>
+      <div *ngIf="csvFile">
+        <div class="row mb-3">
+            <div class="col-md-12 mb-3 mt-3">
+                <ul><li><h5 style="display: inline-block;" class="letra-morada fs-5">Archivo CSV:</h5></ul>
+                <hr/>
+            </div>
+            <div class="col mb-3">
+                    <div class="d-flex justify-content-center align-items-center">
+                      <img src="../../../assets/images/csv.png" alt="Icono CSV" class="img-fluid" style="max-width: 100px;">
+                      <span style="margin-left:8px;">{{ csvFile.name }}</span>
+                      <button style="margin-left:8px;" (click)="cancelarArchivo()" class="btn borde-morado">Cancelar</button>
+                    </div>
+            </div>
+            <div class="col-md-12">
+                <button type="button" class="btn boton_morado" style="width:100%;" (click)="enviarArchivo() ">Subir archivo</button>
+            </div>
+          </div>
+      </div>
+      <div *ngIf="!csvFile">
+        <div class="row mt-2 mb-2">
+            <div class="col-md-12 mb-3 mt-3">
+                <ul><li><h5 style="display: inline-block;" class="letra-morada fs-5">Seleccione el archivo CSV:</h5></ul>
+            </div>
+            <div class="col">
+                <label for="fileInput" class="custom-file-upload">
+                    <input id="fileInput" name="carga_usuarios" type="file" (change)="onFileSelected($event)" accept=".csv">
+                </label>
+                <div (drop)="onDrop($event)" (dragover)="onDragOver($event)" class="drop-zone">
+                    <b class="letra-morada">Arrastra y suelta el archivo CSV aquí</b>
+                </div>
+            </div>
+          </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-12 mb-3 mt-3">
+            <ul><li><h5 style="display: inline-block;" class="letra-morada fs-5">Recomendaciones:</h5></ul>
+            <hr/>
+        </div>
+        <div class="col-md-12 mb-3">
+            <label class="letra-morada" style="text-decoration:underline;">1. Formato del Archivo CSV:</label><br/><br/>
+            <label>Asegúrate de que el archivo sea un archivo CSV válido y que cumpla con el formato estándar. Puedes abrirlo en un editor de texto para comprobar su estructura.</label>
+        </div>
+        <div class="col-md-12 mb-3">
+            <label class="letra-morada" style="text-decoration:underline;">2. Separador de Campos:</label><br/><br/>
+            <label>Verifica que el archivo utilice el separador de campos correcto (generalmente coma o punto y coma). Esto es importante para que los datos se importen correctamente.</label>
+        </div>
+        <div class="col-md-12 mb-3">
+            <label class="letra-morada" style="text-decoration:underline;">3. Encabezados de Columna::</label><br/><br/>
+            <label>Asegúrate de que la primera fila del archivo contenga los nombres de las columnas. Estos serán importantes para identificar y mapear los datos.</label>
+        </div>
+        <div class="col-md-12 mb-3">
+            <label class="letra-morada" style="text-decoration:underline;">4. Evitar Celdas Vacías:</label><br/><br/>
+            <label>Intenta evitar celdas vacías en el archivo. Si hay celdas sin datos, esto puede causar problemas al importar.</label>
+        </div>
+        <div class="col-md-12 mb-3">
+            <label class="letra-morada" style="text-decoration:underline;">5. Nombres de Columna Únicos:</label><br/><br/>
+            <label>Asegúrate de que los nombres de columna sean únicos. Esto es importante para evitar conflictos al procesar los datos.</label>
+        </div>
+        <div class="col-md-12 mb-3">
+            <label class="letra-morada" style="text-decoration:underline;">6. Evitar Caracteres Especiales:</label><br/><br/>
+            <label>Evita el uso de caracteres especiales en los nombres de columna o en los datos. Algunos caracteres pueden causar problemas de codificación.</label>
+        </div>
+        <div class="col-md-12 mb-3">
+            <label class="letra-morada" style="text-decoration:underline;">7. Tamaño del Archivo:</label><br/><br/>
+            <label>Verifica que el archivo no sea demasiado grande para subirlo. Si es muy grande, considera dividirlo en partes más pequeñas.</label>
+        </div>
+        <div class="col-md-12 mb-3">
+            <label class="letra-morada" style="text-decoration:underline;">8. Compatibilidad del Archivo:</label><br/><br/>
+            <label>Asegúrate de que el archivo no esté abierto en otro programa cuando intentes subirlo. Esto puede evitar conflictos de acceso.</label>
+        </div>
+        <div class="col-md-12 mb-3">
+            <label class="letra-morada" style="text-decoration:underline;">9. Respaldo del Archivo Original:</label><br/><br/>
+            <label>Siempre guarda una copia del archivo original en tu sistema antes de realizar cualquier modificación.</label>
+        </div>
+        <div class="col-md-12 mb-3">
+            <label class="letra-morada" style="text-decoration:underline;">10. Cabeceras:</label><br/><br/>
+            <label>Las cabeceras que componen al archivo son:</label>
+            <table class="table tabla-categorias" style="margin-top: 10px;">
+                <thead>
+                    <tr>
+                        <th scope="col">Atributo</th>
+                        <th scope="col">Detalle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>nombre</td>
+                        <td>nombre del estudiante</td>
+                    </tr>
+                    <tr>
+                        <td>email</td>
+                        <td>correo del estudiante</td>
+                    </tr>
+                    <tr>
+                        <td>password</td>
+                        <td>contraseña no encriptada para asignar</td>
+                    </tr>
+                    <tr>
+                        <td>tipo_usuario_id</td>
+                        <td>2 para profesor o 3 para estudiante</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  

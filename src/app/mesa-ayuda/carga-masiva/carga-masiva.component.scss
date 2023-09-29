@@ -1,0 +1,75 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    //align-items: center;
+}
+.card-medium {
+    width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+    overflow-y:auto;
+    height: 700px;
+    max-height: 90%;
+    margin-top: 3%;
+}
+.letra-morada{
+    color:rgb(76, 6, 122); 
+}
+.boton_morado{
+    background-color:rgb(76, 6, 122);
+    color: white;
+}
+.boton_morado:hover{
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+    background-color: rgb(101, 35, 145); 
+}
+.borde-morado{
+    border-color: rgb(76, 6, 122);
+    color: rgb(76, 6, 122);
+    background-color: white;
+}
+.borde-morado:hover{
+    background-color: rgb(206, 203, 207);
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  .drop-zone {
+    border: 2px dashed #7c03b4;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+  }
+  .drop-zone:hover{
+    background-color: rgb(211, 211, 211);
+  }
+
+  ul {
+    list-style-type: none;
+    li::before {
+      content: "\2022";
+      color:rgb(121, 30, 182);
+      display: inline-block;
+      width: 1em;
+      font-size: 1.5em; 
+      margin-right: 0.1em;
+    }
+  }

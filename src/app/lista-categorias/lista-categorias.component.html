@@ -1,0 +1,39 @@
+<div class="row mt-5 justify-content-center">
+    <div class="col-md-4 d-flex flex-column align-items-center justify-content-center">
+        <h2 class="text-center letra-morada">LISTA DE CATEGORÍAS</h2>
+        <button type="button" class="btn borde-morado mb-3 btn-block" id="subir_categoria" (click)="subirCategoria()">SUBIR CATEGORIA</button>
+    </div>
+    <div class="col-md-8">
+        <div class="card" style="width:100%; overflow-y:auto; max-height:400px;">
+            <div class="card-body">
+                <div class="table-responsive overflow-auto">
+                    <table class="table table-sm table-striped" style="max-height:50%; border-radius:5px;">
+                        <thead>
+                            <tr>
+                                <th class="fondo">ID</th>
+                                <th class="fondo">Categoría</th>
+                                <th class="fondo" colspan="2">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let categoria of categorias">
+                                <td>{{ categoria.id }}</td>
+                                <td>{{ categoria.nombre }}</td>
+                                <td>
+                                    <button class="btn fondo_morado boton_menu  opciones_tabla mb-2" (click)="editarCategoria(categoria)">Editar
+                                        <img src="../../assets/images/editar.png" class="img-fluid" style="max-width: 40px; height:auto; margin-left:5px"/>
+                                    </button> 
+                                </td>
+                                <td>
+                                    <button class="btn fondo_morado boton_menu opciones_tabla mb-2" (click)="eliminarCategoria(categoria)">Eliminar
+                                        <img src="../../assets/images/eliminar.png" class="img-fluid" style="max-width: 40px; height:auto; margin-left:5px"/>
+                                    </button> 
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

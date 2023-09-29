@@ -1,0 +1,61 @@
+.boton-morado{
+    background-color: rgb(76, 6, 122);
+    color: white;
+}
+.boton-morado:hover{
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+    background-color: rgb(101, 35, 145); 
+}
+.tabla-tickets{
+    border-collapse: collapse;
+    border: 1px solid #000000;
+
+}
+.centrar_verticalmente{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+.card-container {
+    margin: 0 auto;
+    max-width: 100%;
+    overflow-x: auto;
+    max-height:800px;
+    overflow-y:auto;
+    border:0;
+}
+.encabezado-morado{
+    background-color: rgb(76, 6, 122);
+    color:white;
+    text-align: center;
+    border: 1px solid #000000;
+}
+td{
+    border: 1px solid #000000;
+}
+.letra-morada{
+    text-align: center;
+    color:rgb(76, 6, 122);
+}
+.opciones-admin{
+    border-color:rgb(76, 6, 122); 
+    outline-color: rgb(76, 6, 122);
+    background-color: white;
+    color:rgb(76, 6, 122);
+    width: 100%;
+    margin:3px;
+}
+.opciones-admin:hover{
+    background-color: rgb(206, 203, 207);
+    box-shadow: 0 0 0 0.2rem rgba(198, 75, 255, 0.25);
+}
+.fecha:disabled{
+    border:0;
+    background-color: white;
+    color:#000000;
+}
+td{
+    text-align: center;
+}
