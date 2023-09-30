@@ -9,7 +9,7 @@ import { Comentario } from './mesa-ayuda/modelo-comentario';
 })
 export class ServicioBackService {
 
-  private urlApi = 'http://127.0.0.1:8000/api';
+  private urlApi = 'https://backendmats-production.up.railway.app/api';
 
   constructor(private http: HttpClient) { }
 
